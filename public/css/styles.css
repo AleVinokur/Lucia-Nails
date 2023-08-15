@@ -1,0 +1,64 @@
+body {
+    background-image: linear-gradient(to top, #fbc2eb 0%, #a6c1ee 100%);
+}
+
+.img-logo {
+    width: 8rem;
+    height: 5rem;
+}
+
+.carrito img {
+    width: 3rem;
+}
+
+.navbar {
+    background: rgb(84,82,129);
+    background: linear-gradient(90deg, rgba(103, 101, 136, 0.548) 1%, rgba(82, 116, 122, 0.315) 100%);
+
+}
+
+.carousel-item img {
+    width: 50%;
+
+}
+
+#carouselExample {
+    width: 60%;
+    margin: 0 auto;
+    margin-top: 20px;
+}
+
+/* Estilos personalizados para la disposición de las tarjetas de producto */
+.producto {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+}
+
+.producto img {
+    width: 10rem;
+    height: 8rem;
+};
+
+.producto h5 {
+    font-size: 1.25rem;
+    margin-top: 10px;
+}
+
+.producto p {
+    font-size: 1.5rem;
+    font-weight: bold;
+    margin-top: 5px;
+    color: #333;
+}
+
+.input-group {
+    margin-top: 10px;
+}
+
+.quantity {
+    width: 50px;
+    text-align: center;
+}
+

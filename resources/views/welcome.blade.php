@@ -8,34 +8,11 @@
     <title>Nombre del Emprendimiento</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9" crossorigin="anonymous">
+    <link rel="stylesheet" href="{{ asset('css/styles.css') }}">
+
 </head>
 
 <body>
-
-    <style>
-        .img-logo {
-            width: 8rem;
-            height: 5rem;
-        }
-
-        .navbar {
-            background: rgb(198, 196, 237);
-            background: linear-gradient(90deg, rgba(198, 196, 237, 1) 0%, rgba(223, 223, 232, 1) 32%, rgba(144, 209, 223, 1) 80%, rgba(185, 217, 223, 1) 100%);
-
-        }
-
-        .carousel-item img {
-            width: 50%;
-
-        }
-
-        #carouselExample {
-            width: 60%;
-            margin: 0 auto;
-            margin-top: 20px;
-        }
-    </style>
-
 
     <!-- Navbar -->
     <nav class="navbar navbar-expand-lg ">
@@ -45,7 +22,7 @@
             </a>
 
             <!-- Carrito -->
-            <ul class="navbar-nav ml-auto">
+            <ul class="navbar-nav ml-auto carrito">
                 <li class="nav-item">
                     <a class="nav-link" href="#">
                         <img src="{{ asset('img/carrito.png') }}" alt="">
@@ -74,10 +51,87 @@
         </button>
     </div>
 
+    <div class="container mt-4 d-flex flex-wrap" id="productCatalog">
+        <div>
+            <!-- Los productos se generarán aquí automáticamente -->
+        </div>
+    </div>
+
+
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="{{ asset('assets/bootstrap.min.js') }}"></script>
     <script src="{{ asset('assets/fontawesome.js') }}"></script>
 
+    <script>
+        $(document).ready(function() {
+            const products = [{
+                    name: 'Producto 1',
+                    price: 19.99,
+                    image: 'img/producto1.jpg'
+                },
+                {
+                    name: 'Producto 2',
+                    price: 29.99,
+                    image: 'img/producto2.webp'
+                },
+                {
+                    name: 'Producto 3',
+                    price: 29.99,
+                    image: 'img/producto3.jfif'
+                },
+                {
+                    name: 'Producto 4',
+                    price: 29.99,
+                    image: 'img/producto4.jfif'
+                },
+                {
+                    name: 'Producto 5',
+                    price: 29.99,
+                    image: 'img/producto5.jpg'
+                },
+                {
+                    name: 'Producto 6',
+                    price: 29.99,
+                    image: 'img/producto6.jpg'
+                },
+
+            ];
+
+            const productCatalog = $("#productCatalog");
+            products.forEach((product, index) => {
+                const card = `
+        <div class="producto col-md-4 mb-4 mt-5">
+            <img src="{{ asset('${product.image}') }}" class="card-img-top" alt="${product.name}">
+            <div class="card-body d-flex flex-column align-items-center text-center">
+                <p class="card-price">$${product.price}</p>
+                <h5 class="card-title">${product.name}</h5>
+                <div class="input-group mb-3">
+                    <button class="btn btn-outline-secondary addToCartBtn" data-index="${index}">Agregar al Carrito</button>
+                </div>
+            </div>
+        </div>
+    `;
+
+                productCatalog.append(card);
+            });
+
+            $(".plusBtn").click(function() {
+                const index = $(this).data("index");
+                const quantityInput = $(this).siblings(".quantity");
+                const quantity = parseInt(quantityInput.val());
+                quantityInput.val(quantity + 1);
+            });
+
+            $(".minusBtn").click(function() {
+                const index = $(this).data("index");
+                const quantityInput = $(this).siblings(".quantity");
+                const quantity = parseInt(quantityInput.val());
+                if (quantity > 1) {
+                    quantityInput.val(quantity - 1);
+                }
+            });
+        });
+    </script>
 </body>
 
 </html>
