@@ -74,10 +74,10 @@
         </button>
     </div>
 
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="{{ asset('assets/bootstrap.min.js') }}"></script>
+    <script src="{{ asset('assets/fontawesome.js') }}"></script>
 
-
-    <script src="ruta/de/tu/bootstrap.min.js"></script>
-    <script src="ruta/de/tu/fontawesome.min.js"></script>
 </body>
 
 </html>
