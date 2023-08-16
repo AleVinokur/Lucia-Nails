@@ -1,34 +1,34 @@
-$(document).ready(function() {
+$(document).ready(function () {
     const products = [{
-            name: 'Producto 1',
-            price: 19.99,
-            image: baseUrl + '/img/producto1.jpg'
-        },
-        {
-            name: 'Producto 2',
-            price: 29.99,
-            image: baseUrl + '/img/producto2.webp'
-        },
-        {
-            name: 'Producto 3',
-            price: 29.99,
-            image: baseUrl + '/img/producto3.jfif'
-        },
-        {
-            name: 'Producto 4',
-            price: 29.99,
-            image: baseUrl + '/img/producto4.jfif'
-        },
-        {
-            name: 'Producto 5',
-            price: 29.99,
-            image: baseUrl + '/img/producto5.jpg'
-        },
-        {
-            name: 'Producto 6',
-            price: 29.99,
-            image: baseUrl + '/img/producto6.jpg'
-        },
+        name: 'Producto 1',
+        price: 19.99,
+        image: baseUrl + '/img/producto1.jpg'
+    },
+    {
+        name: 'Producto 2',
+        price: 29.99,
+        image: baseUrl + '/img/producto2.webp'
+    },
+    {
+        name: 'Producto 3',
+        price: 29.99,
+        image: baseUrl + '/img/producto3.jfif'
+    },
+    {
+        name: 'Producto 4',
+        price: 29.99,
+        image: baseUrl + '/img/producto4.jfif'
+    },
+    {
+        name: 'Producto 5',
+        price: 29.99,
+        image: baseUrl + '/img/producto5.jpg'
+    },
+    {
+        name: 'Producto 6',
+        price: 29.99,
+        image: baseUrl + '/img/producto6.jpg'
+    },
 
     ];
 
@@ -41,7 +41,7 @@ $(document).ready(function() {
                     <p class="card-price">$${product.price}</p>
                     <h5 class="card-title">${product.name}</h5>
                     <div class="input-group mb-3">
-                        <button class="btn btn-outline-secondary addToCartBtn" data-index="${index}">Agregar al Carrito</button>
+                    <button class="btn btn-outline-secondary addToCartBtn" data-index="${index}">Agregar al Carrito</button>
                     </div>
                 </div>
             </div>
@@ -50,14 +50,14 @@ $(document).ready(function() {
         productCatalog.append(card);
     });
 
-    $(".plusBtn").click(function() {
+    $(".plusBtn").click(function () {
         const index = $(this).data("index");
         const quantityInput = $(this).siblings(".quantity");
         const quantity = parseInt(quantityInput.val());
         quantityInput.val(quantity + 1);
     });
 
-    $(".minusBtn").click(function() {
+    $(".minusBtn").click(function () {
         const index = $(this).data("index");
         const quantityInput = $(this).siblings(".quantity");
         const quantity = parseInt(quantityInput.val());
@@ -68,17 +68,15 @@ $(document).ready(function() {
 
     $(".addToCartBtn").click(function() {
         const index = $(this).data("index");
-        const product = products[index];
-
-        // Obtener el carrito actual del Local Storage
-        let cart = JSON.parse(localStorage.getItem("cart")) || [];
-
-        // Agregar el producto al carrito
-        cart.push(product);
-
-        // Guardar el carrito actualizado en el Local Storage
-        localStorage.setItem("cart", JSON.stringify(cart));
-
-        alert("Producto agregado al carrito.");
+        $.ajax({
+            url: "{{ route('cart.add') }}",
+            type: "POST",
+            data: { index: index },
+            success: function(response) {
+                console.log(response.message);
+            }
+        });
     });
+
+
 });
